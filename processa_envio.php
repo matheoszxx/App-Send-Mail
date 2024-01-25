@@ -60,7 +60,7 @@
     
         //Recipients
         $mail->setFrom('mathlmarques1@gmail.com', 'Matheus Rementente');
-        $mail->addAddress('mathlmarques1@gmail.com', 'Matheus Destinatario');     //Add a recipient
+        $mail->addAddress($mensagem->__get('para'));     //Add a recipient
         //$mail->addReplyTo('info@example.com', 'Information');
         //$mail->addCC('cc@example.com');
         //$mail->addBCC('bcc@example.com');
@@ -71,12 +71,12 @@
     
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Oi, eu sou o assunto';
-        $mail->Body    = 'Oi. Eu sou o conteudo do <strong>e-mail</strong>';
-        $mail->AltBody = 'Oi. Eu sou o conteudo do e-mail';
+        $mail->Subject = $mensagem->__get('assunto');
+        $mail->Body    = $mensagem->__get('mensagem');
+        $mail->AltBody = 'Para ver todo o conteudo do e-mail, utilize um navegador que aceite tags HTML.';
     
         $mail->send();
-        echo 'Message has been sent';
+        echo 'E-mail enviado com sucesso!';
     } catch (Exception $e) {
         echo 'Não foi possível enviar este e-mail! Por favor tente novamente mais tarde.';
         echo "Detalhes do erro: {$mail->ErrorInfo}";
